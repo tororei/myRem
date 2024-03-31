@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Reminder</title>
+    <style>
+        .medicine-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .medicine-item {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .delete-button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Medicine Reminder</h2>
+    <form id="medicineForm">
+        <label for="medicineName">Medicine:</label><br>
+        <input type="text" id="medicineName" name="medicineName" required><br>
+        
+        <label for="dosage">Dosage:</label><br>
+        <input type="text" id="dosage" name="dosage" required><br>
+        
+        <label for="time">Time:</label><br>
+        <input type="time" id="time" name="time" required><br>
+        
+        <label for="food">Food:</label><br>
+        <input type="text" id="food" name="food"><br>
+        
+        <button onclick="addMedicine()">Add Medicine</button>
+    </form>
+
+    <h3>Medicine List:</h3>
+    <ul class="medicine-list" id="medicineList">
+        <!-- Medicine items will be added here -->
+    </ul>
+
+    <script>
+        function addMedicine() {
+            var medicineName = document.getElementById("medicineName").value;
+            var dosage = document.getElementById("dosage").value;
+            var time = document.getElementById("time").value;
+            var food = document.getElementById("food").value;
+
+            var medicineItem = document.createElement("li");
+            medicineItem.classList.add("medicine-item");
+            medicineItem.innerHTML = `
+                <strong>Medicine:</strong> ${medicineName}<br>
+                <strong>Dosage:</strong> ${dosage}<br>
+                <strong>Time:</strong> ${time}<br>
+                <strong>Food:</strong> ${food}<br>
+                <button class="delete-button" onclick="deleteMedicine(this)">Delete</button>
+            `;
+
+            document.getElementById("medicineList").appendChild(medicineItem);
+        }
+
+        function deleteMedicine(button) {
+            var listItem = button.parentNode;
+            listItem.parentNode.removeChild(listItem);
+        }
+    </script>
+</body>
+</html>
